@@ -61,7 +61,8 @@ public class StringCalculator implements Calculator {
             small = a;
         }
 
-        if (isNegative(a) && !isNegative(b) || !isNegative(a) && isNegative(b))
+        if (a.equals("0") || b.equals("0")) return "0";
+        else if (isNegative(a) && !isNegative(b) || !isNegative(a) && isNegative(b))
             return negative + internalMultiply(getUnsigned(big), getUnsigned(small));
         else
             return internalMultiply(getUnsigned(big), getUnsigned(small));

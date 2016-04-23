@@ -153,6 +153,16 @@ public class TestCalculator {
     }
 
     @Test
+    public void testMultiplyPositiveBigAndZeroNumbers() {
+        assertEquals("0", calc.multiply("56465713216138934", "0"));
+    }
+
+    @Test
+    public void testMultiplyZeroAndPositiveBigNumber() {
+        assertEquals("0", calc.multiply("0", "56465713216138934"));
+    }
+
+    @Test
     public void testMultiplyAllPositiveBigNumbers() {
         assertEquals("10122309352552992448150", calc.multiply("154621384241", "65465132150"));
     }
