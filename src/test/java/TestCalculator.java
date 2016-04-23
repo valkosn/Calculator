@@ -147,17 +147,22 @@ public class TestCalculator {
         assertEquals("5000", calc.multiply("-100", "-50"));
     }
 
+    @Test
+    public void testMultiplyAllPositiveBigAndSmallNumbers() {
+        assertEquals("111111111", calc.multiply("12345679", "9"));
+    }
 
+    @Test
     public void testMultiplyAllPositiveBigNumbers() {
         assertEquals("10122309352552992448150", calc.multiply("154621384241", "65465132150"));
     }
 
-
+    @Test
     public void testMultiplyPositiveAndNegativeBigNumbers() {
         assertEquals("-10122309352552992448150", calc.multiply("154621384241", "-65465132150"));
     }
 
-
+    @Test
     public void testMultiplyAllNegativeBigNumbers() {
         assertEquals("10122309352552992448150", calc.multiply("-154621384241", "-65465132150"));
     }

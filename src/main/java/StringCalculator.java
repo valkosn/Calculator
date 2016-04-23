@@ -50,7 +50,21 @@ public class StringCalculator implements Calculator {
     }
 
     public String multiply(String a, String b) {
-        return Integer.toString(Integer.parseInt(a) * Integer.parseInt(b));
+
+        String big;
+        String small;
+        if (comparator.compare(getUnsigned(a), getUnsigned(b)) >= 0) {
+            big = a;
+            small = b;
+        } else {
+            big = b;
+            small = a;
+        }
+
+        if (isNegative(a) && !isNegative(b) || !isNegative(a) && isNegative(b))
+            return negative + internalMultiply(getUnsigned(big), getUnsigned(small));
+        else
+            return internalMultiply(getUnsigned(big), getUnsigned(small));
     }
 
     private String internalAppend(String a, String b) {
@@ -128,8 +142,37 @@ public class StringCalculator implements Calculator {
         return !result.toString().isEmpty() ? result.toString() : "0";
     }
 
+    private String internalSimpleMultiply(String a, String b) {
+
+        int i = 0;
+        String result = "0";
+        while (!(subtract(b, Integer.toString(i))).equals("0")) {
+            result = append(a, result);
+            i++;
+        }
+
+        return result;
+    }
+
     private String internalMultiply(String a, String b) {
-        throw new NotImplementedException();
+
+        List<Integer> secondNList = getReversedListFromString(b);
+        List<String> resultList = new ArrayList<>();
+        String result = "0";
+        String zeros = "";
+
+        for (int i = 0; i < secondNList.size(); i++) {
+            String tempResult = internalSimpleMultiply(a, secondNList.get(i).toString());
+            resultList.add(tempResult + zeros);
+            zeros = zeros + "0";
+        }
+
+        for (String iterResult : resultList) {
+            result = append(result, iterResult);
+        }
+
+
+        return result;
     }
 
     private boolean isNegative(String str) {
